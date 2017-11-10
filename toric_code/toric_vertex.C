@@ -7,13 +7,13 @@
 using namespace std;
 int N = 2;
 int x_size = N, z_size = N;
-vector<int> P_vec;
+vector<int> V_vec;
 
 int toric_vertex(){
   // here we construct a simple toric code on NxN lattice
   // Consider the vertex operators of total N^2-1 
-  // i.e For 2x2 independent operators are P00, P01, P10
-  // Pij = {X(ij), Z(ij), X(i,j-1), Z(i-1,j)} i,j=0,1 
+  // i.e For 2x2 independent operators are V00, V01, V10
+  // Vij = {X(ij), Z(ij), X(i,j-1), Z(i-1,j)} i,j=0,1 
   // Periodicity yields if i,j=-1, set i,j=2 
  
   int xmax = x_size+1, zmax = z_size+1;
@@ -36,22 +36,22 @@ int toric_vertex(){
       if (jm1==-1) jm1 = z_size-1;
       x[i][jm1] = 1, z[im1][j] = 1;
 
-      // loop over plaquett vector space
-      P_vec.clear();
-      for(int pi=0; pi<x_size; pi++){
-	for(int pj=0; pj<z_size; pj++){
-	  P_vec.push_back(x[pi][pj]);
+      // loop over vertex vector space
+      V_vec.clear();
+      for(int vi=0; vi<x_size; vi++){
+	for(int vj=0; vj<z_size; vj++){
+	  V_vec.push_back(x[vi][vj]);
 	}
       }
-      for(int pi=0; pi<x_size; pi++){
-        for(int pj=0; pj<z_size; pj++){
-	  P_vec.push_back(z[pi][pj]);
+      for(int vi=0; vi<x_size; vi++){
+        for(int vj=0; vj<z_size; vj++){
+	  V_vec.push_back(z[vi][vj]);
 	}
       }
 
       // print vertex matrix representation
-      cout << "P" <<  "[ " << i << "] [" << j << "]:" << " ";
-      for(int k=0; k<P_vec.size(); k++) cout << P_vec[k] << " " ;
+      cout << "V" <<  "[ " << i << "] [" << j << "]:" << " ";
+      for(int k=0; k<V_vec.size(); k++) cout << V_vec[k] << " " ;
       cout << " " << endl;
     }
   }
